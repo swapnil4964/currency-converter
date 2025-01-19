@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .converter-container {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background: #f9f9f9;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .converter-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input,
+      select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        width: 100%;
+      }
+      input {
+        width: 380px;
+      }
+
+      .convert-button {
+        background-color: #28a745;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .convert-button:hover {
+        background-color: #218838;
+      }
+
+      .result {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 18px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="converter-container">
+      <h1>Currency Converter</h1>
+      <form id="converterForm" class="converter-form">
+        <div class="form-group">
+          <label for="amount">Amount:</label>
+          <input type="number" id="amount" name="amount" required />
+        </div>
+
+        <div class="form-group">
+          <label for="fromCurrency">From Currency:</label>
+          <select id="fromCurrency" name="fromCurrency" required>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="toCurrency">To Currency:</label>
+          <select id="toCurrency" name="toCurrency" required>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+
+        <button type="submit" class="convert-button">Convert</button>
+      </form>
+
+      <div id="resultDisplay" class="result" style="display: none">
+        <strong id="resultText"></strong>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("converterForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the default form submission
+
+          const amount = parseFloat(document.getElementById("amount").value);
+          const fromCurrency = document.getElementById("fromCurrency").value;
+          const toCurrency = document.getElementById("toCurrency").value;
+
+          // Dummy conversion logic (replace with actual logic)
+          let conversionRate = 1; // Add logic here to set the correct conversion rate based on selected currencies
+          if (fromCurrency === "USD" && toCurrency === "EUR")
+            conversionRate = 0.85;
+          else if (fromCurrency === "EUR" && toCurrency === "USD")
+            conversionRate = 1.18;
+          // Add more conversion rates as needed
+
+          const result = amount * conversionRate;
+          const resultDisplay = document.getElementById("resultDisplay");
+          const resultText = document.getElementById("resultText");
+
+          resultText.textContent = `${amount} ${fromCurrency} = ${result.toFixed(
+            2
+          )} ${toCurrency}`;
+          resultDisplay.style.display = "block";
+        });
+    </script>
+  </body>
+</html>
